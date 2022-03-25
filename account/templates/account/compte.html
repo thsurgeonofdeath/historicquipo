@@ -1,0 +1,39 @@
+{% extends 'account/account.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+    <!-- For Demo Purpose -->
+    <header class="py-5 text-center">
+        <h2 class="display-4">Hello There</h2>
+        <p class="lead mb-0">General Kenobi!</p>
+        </p>
+    </header>
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="mb-4">
+                <h6 >Username : <p class="d-inline" style="color:gray;">{{user.username}}</p> </h6>
+                <!-- Solid divider -->
+                <hr class="solid">
+            </div>
+            <div class="mb-4">
+                <h6 >Email : <p class="d-inline" style="color:gray;">{{user.email}}</p> </h6>
+                <!-- Solid divider -->
+                <hr class="solid">
+            </div>
+            <div class="mb-4">
+                <h6 >Phone number : <p class="d-inline" style="color:gray;">+{{user.phone}}</p> </h6>
+                <!-- Solid divider -->
+                <hr class="solid">
+            </div>
+            <div class="mb-4">
+                <h6 >Date Joined : <p class="d-inline" style="color:gray;">{{user.date_joined}}</p> </h6>
+                <!-- Solid divider -->
+                <hr class="solid">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

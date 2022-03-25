@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content%}
+
+<style type="text/css">
+	.card{
+		max-width: 700px;
+	}
+	.card-body{
+		padding: 20px;
+	}
+</style>
+
+<div class="container">
+	<div class="row">
+		  {% if success_message %}
+		  <p style="color:green; text-align: center;">{{ success_message }}</p>
+		  {% endif %}
+
+		<!-- Blog Post -->
+		<div class="card m-auto">
+			<img class="card-img-top" src="{{monument.imageURL}}" style="width:100%; height: 100%;">
+			<div class="card-body mt-2 mb-2">
+			  <h2 class="card-title">{{monument.title}}</h2>
+			  <h6 class="card-title"> City:  {{monument.city}}</h6>
+			  <p class="card-text">{{monument.description|safe}}</p>
+
+			  {{ map|safe}}
+
+			</div>
+			<div class="card-footer text-muted">
+			  Date de construction : {{monument.year}}
+			  	{% if user.is_authenticated %}
+			  		{% if isSaved %}
+						<a class="btn btn-outline-info" style="display: inline-block; float: right; margin: auto;" href="{% url 'monument:saving' monument.slug %}">Unsave</a>
+			  		{% else %}
+						<a class="btn btn-outline-info" style="display: inline-block; float: right; margin: auto;" href="{% url 'monument:saving' monument.slug %}">save</a>
+					{% endif %}
+				{% endif %}
+			</div>
+			
+
+		</div>
+	</div>
+</div>
+
+
+{% endblock content %}

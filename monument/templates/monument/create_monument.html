@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content%}
+
+<style type="text/css">
+  .create-form {
+	    width: 100%;
+	    max-width: 100%;
+	    padding: 15px;
+	    margin: auto;
+  	}
+
+  	.submit-button{
+  		max-width: 200px;
+  	}
+</style>
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-7 offset-lg-1">
+			<form class="create-form" method="post" enctype="multipart/form-data">{% csrf_token %}
+
+				<div class="d-flex flex-column pb-3">
+    			<img class="img-fluid mx-auto d-block" src="{% static 'Historylogo.png' %}" height="100" width="100">
+  			</div>
+
+				<!-- title -->
+				<div class="form-group">
+					<label for="id_title">Nom du monument :</label>
+					<input class="form-control" type="text" name="title" id="id_title" required autofocus>
+				</div>
+
+				<div class="form-group">
+					<label for="id_year">Date de construction :</label>
+					<input class="form-control" type="string" name="year" id="id_year" placeholder="" required autofocus>
+				</div>
+
+				<div class="form-group">
+					<label for="id_year"> Ville :</label>
+					<input class="form-control" type="string" name="city" id="id_city" placeholder="" required autofocus>
+				</div>
+
+				<!-- Description -->
+				<div class="form-group">
+					<label for="id_body">Description</label>
+					<textarea class="form-control" rows="10" type="text" name="description" id="id_body" required></textarea>
+				</div>
+
+				<!-- Image -->
+				<div class="form-group">
+					<label for="id_image">Image</label><br>
+					<input  type="file" name="image" id="id_image" accept="image/*" required>
+				</div>
+
+				<!-- Latitude -->
+				<div class="form-group">
+					<label for="id_latitude">Latitude</label>
+					<input class="form-control" type="float" name="latitude" id="id_title" required autofocus>
+				</div>
+
+				<!-- Longitude -->
+				<div class="form-group">
+					<label for="id_longitude">Longitude</label>
+					<input class="form-control" type="float" name="longitude" id="longitude" required autofocus>
+				</div>
+
+				<!-- Submit btn -->
+				{% for field in form %}
+				  <p>
+				    {% for error in field.errors %}
+				      <p style="color: red">{{ error }}</p>
+				    {% endfor %}
+				  </p>
+				{% endfor %}
+				{% if form.non_field_errors %}
+					<div style="color: red">
+					  <p>{{form.non_field_errors}}</p>
+					</div>  
+				{% endif %}
+
+				<!-- Submit btn -->
+				<button class="submit-button btn btn-lg btn-info btn-block m-auto" type="submit"> Ajouter Monument </button>
+			</form>	
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content%}
+
+{% include 'account/snippets/style.html' %}
+
+<div class="container" >
+	<div class="d-flex flex-column pb-3">
+		<br>
+		<br>
+		<br>
+    	<img class="img-fluid mx-auto d-block" src="{% static 'Historylogo.png' %}" height="100" width="100">
+    	<br>
+    	<p class="m-auto">Are you sure you want to delete the monument: {{monument}} ? </p>  
+    	<br>
+    	  	<form method="POST" class="form-signin">{% csrf_token %}
+    		<a class="btn btn-secondary" href="{% url 'home' %}"> Cancel </a>
+			<button class="btn btn-danger" type="submit" style="display: inline-block; margin-left: 100px;" onclick="deleted()">Confirm</button>
+    	</form>  	
+  	</div>
+
+</div>
+
+<script type="text/javascript">
+	function deleted(){
+ 	 alert("Monument was deleted! ");
+	}
+</script>
+
+
+{% endblock content%}

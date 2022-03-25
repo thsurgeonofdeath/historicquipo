@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content%}
+
+{% include 'account/snippets/style.html' %}
+
+
+    <div class="container">
+      <div class="d-flex flex-column pb-3">
+      <img class="img-fluid mx-auto d-block" src="{% static 'Historylogo.png' %}" height="100" width="100">
+      </div>
+      <br>
+        <form action="" method="POST" class="form-signin" >{% csrf_token %}
+           <select name="location1" class="form-control">
+            <option value ="" selected disabled hidden> Select Monument </option>
+            {% for monument in trying %}
+            <option value="{{monument.city}}">{{monument.title}}</option>
+            {% endfor %}
+           </select>
+           <select name="location2" class="form-control">
+            <option value ="" selected disabled hidden> Select Monument </option>
+            {% for monument in trying %}
+            <option value="{{monument.city}}">{{monument.title}}</option>
+            {% endfor %}
+           </select>
+           <select name="location3" class="form-control">
+            <option value ="" selected disabled hidden> Select Monument </option>
+            {% for monument in trying %}
+            <option value="{{monument.city}}">{{monument.title}}</option>
+            {% endfor %}
+           </select>
+           <select name="location4" class="form-control">
+            <option value ="" selected disabled hidden> Select Monument </option>
+            {% for monument in trying %}
+            <option value="{{monument.city}}">{{monument.title}}</option>
+            {% endfor %}
+           </select>
+            <button type="submit" class="btn btn-info form-control"> Get Route </button>
+        </form>
+        <br>
+        {{ map|safe }}
+        <br>
+
+    </div>
+  {% endblock content %}
