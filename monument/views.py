@@ -14,7 +14,7 @@ def create_monument_view(request):
 	context = {}
 	user = request.user
 	if not user.is_authenticated or not user.is_admin:
-		return HttpResponse('Access denied, you need the permission to add a monument')
+		return redirect("must_admin")
 
 	form = AddMonumentForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
@@ -59,7 +59,7 @@ def edit_monument_view(request, slug):
 
 	user = request.user
 	if not user.is_authenticated or not user.is_admin:
-		return HttpResponse('Access denied, you need the permission to edit')
+		return redirect("must_admin")
 
 	monument = get_object_or_404(Monument, slug=slug)
 
@@ -92,7 +92,7 @@ def delete_monument_view(request, slug):
 
 	user = request.user
 	if not user.is_authenticated or not user.is_admin:
-		return HttpResponse('Access denied, you need the permission to delete')
+		return redirect("must_admin")
 
 	monument = get_object_or_404(Monument, slug=slug)
 	context['monument'] = monument
@@ -108,7 +108,7 @@ def delete_monument_view(request, slug):
 def saved_monument_view(request, slug):
 	user = request.user
 	if not user.is_authenticated:
-		return redirect("home")
+		return redirect("must_authenticate")
 
 	monument = get_object_or_404(Monument, slug=slug)
 	if monument.saved.filter(id= request.user.id).exists():
@@ -142,7 +142,7 @@ def unsave_monument(request, slug):
 
 	user = request.user
 	if not user.is_authenticated:
-		return redirect("home")
+		return redirect("must_authenticate")
 
 	monument = get_object_or_404(Monument, slug=slug)
 	if monument.saved.filter(id= request.user.id).exists():

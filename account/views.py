@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from account.forms import *
+from account.models import Account
 from monument.models import Monument
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
@@ -64,14 +65,14 @@ def account_view(request):
 	context={}
 	user = request.user
 	if not user.is_authenticated:
-		return redirect("login")
+		return redirect("must_authenticate")
 
 	context['user'] = user
 	return render(request,"account/compte.html",context)
 
 def account_edit(request):
 	if not request.user.is_authenticated:
-			return redirect("login")
+		return redirect("must_authenticate")
 
 	context = {}
 	if request.POST:
@@ -101,6 +102,10 @@ def account_edit(request):
 
 def account_saved(request):
 	context={}
+	user = request.user
+	if not user.is_authenticated:
+		return redirect("must_authenticate")
+
 	savedlist = Monument.objects.filter(saved = request.user)
 
 	context['savedlist'] = savedlist
@@ -111,10 +116,28 @@ def about_us_view(request):
 	context={}
 	user = request.user
 	if not user.is_authenticated:
-		return redirect("login")
+		return redirect("must_authenticate")
 
-	context['user'] = user
+	users = Account.objects.all()
+
+	context['users'] = users
 	return render(request,"account/aboutus.html",context)
 
 
+def must_authenticate_view(request):
+	return render(request, 'account/must_authenticate.html', {})
 
+
+def must_admin_view(request):
+	return render(request, 'account/must_admin.html', {})
+
+def users_table_view(request):
+	context = {}
+	user = request.user
+	if not user.is_authenticated or not user.is_admin:
+		return redirect("must_admin")
+
+		
+	users = Account.objects.filter(is_admin=False)
+	context['users'] = users
+	return render(request, 'account/users_table.html', context)

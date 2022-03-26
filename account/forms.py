@@ -51,3 +51,8 @@ class AccountUpdateForm(forms.ModelForm):
 		except Account.DoesNotExist:
 			return phone
 		raise forms.ValidationError('phone number "%s" is already in use.' % phone)
+
+class Accountactiveform(forms.ModelForm):
+	class Meta:
+		model = Account
+		fields = ('is_active',)

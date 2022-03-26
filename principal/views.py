@@ -6,7 +6,7 @@ from operator import attrgetter
 
 # Create your views here.
 
-MONUMENTS_PER_PAGE = 9
+MONUMENTS_PER_PAGE = 6
 
 def home_screen_view(request):
 	context={}

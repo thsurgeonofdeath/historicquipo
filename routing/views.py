@@ -1,7 +1,7 @@
 import folium
 import geopy
 import openrouteservice as ors
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from geopy.distance import geodesic
 from .forms import GetLocations
 from .utils import arrange_map, get_zoom, get_lat_lng
@@ -10,6 +10,7 @@ import json
 import requests
 from sys import maxsize
 from monument.models import Monument
+from django.http import HttpResponseRedirect, HttpResponse
 
 # Create your views here.
 v = 4
@@ -63,6 +64,10 @@ def next_perm(p):
 
 
 def home(request):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect("must_authenticate")
+
     form = GetLocations(request.POST)
     context={}
 

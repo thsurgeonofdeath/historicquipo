@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<style type="text/css">
+	a{
+		color: #56B6D9;
+		text-decoration: none;
+	}
+</style>
+
+<div class="container">
+	<div class="d-flex flex-column">
+		<p class="m-auto">You must authenticate to view this page </p>
+		<p class="m-auto">
+			<a href="{% url 'register' %}">Create an account</a> or 
+			<a href="{% url 'login' %}">login</a>.
+		</p>
+	</div>
+</div>
+
+{% endblock content %}
