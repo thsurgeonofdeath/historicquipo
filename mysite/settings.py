@@ -31,8 +31,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'salaheddine.elkadi1@usmba.ac.ma'
-EMAIL_HOST_PASSWORD = 'fillerpassword'
+EMAIL_HOST_USER = 'enter_your_email_here'
+EMAIL_HOST_PASSWORD = 'enter_your_password_here'
 
 
 ALLOWED_HOSTS = []
